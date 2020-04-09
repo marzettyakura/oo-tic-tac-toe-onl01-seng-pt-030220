@@ -1,9 +1,9 @@
 class TicTacToe
-  
+
   def initialize(board = nil)
     @board = board || Array.new(9, " ")
   end
-  
+
   WIN_COMBINATIONS = [
     [0, 1, 2], #Top row
     [3, 4, 5], #Middle row
@@ -14,7 +14,7 @@ class TicTacToe
     [0, 4, 8],
     [2, 4, 6]
     ]
-    
+
   def display_board
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts "-----------"
@@ -22,27 +22,27 @@ class TicTacToe
     puts "-----------"
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
-  
+
   def input_to_index(input)
     input.to_i - 1
   end
-  
+
   def move(index, player)
     @board[index] = player
   end
-  
+
   def position_taken?(index)
     @board[index] == "X" || @board[index] == "O"
   end
-  
+
   def valid_move?(index)
     if index.between?(0,8) && !position_taken?(index)
-      return true 
-    else 
-      return false 
+      return true
+    else
+      return false
     end
   end
-  
+
   def turn
     puts "Please choose a number 1-9"
     input = gets.chomp
@@ -50,15 +50,15 @@ class TicTacToe
     if valid_move?(index)
       move(index, current_player)
       display_board
-    else 
+    else
       turn
     end
   end
-  
+
   def turn_count
     @board.count{|token| token == "X" || token == "O"}
   end
-  
+
   def current_player
     turn_count % 2 == 0 ? "X" : "O"
   end
@@ -80,27 +80,27 @@ class TicTacToe
   }
   return false
 end
-  
+
   def full?
     @board.all? {|index| index == "X" || index == "O"}
-  end 
-  
+  end
+
   def draw?
     if !won? && full?
       return true
-    else 
+    else
       return false
     end
-  end 
-  
+  end
+
   def over?
     if won? || draw? || full?
       return true
-    else 
+    else
       return false
     end
-  end 
-  
+  end
+
   def winner
     index = won?
     if index == false
@@ -111,7 +111,7 @@ end
       return "O"
     end
   end
-  
+
   def play
   until over?
     turn
